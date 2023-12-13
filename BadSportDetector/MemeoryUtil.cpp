@@ -35,6 +35,7 @@ HMODULE MemoryUtil::getProcessModuleHandle(DWORD pid, const TCHAR* moduleName)
     }
     do {
         if (_tcscmp(moduleEntry.szModule, moduleName) == 0) {
+            CloseHandle(handle);
             return moduleEntry.hModule;
         }
     } while (Module32Next(handle, &moduleEntry));
