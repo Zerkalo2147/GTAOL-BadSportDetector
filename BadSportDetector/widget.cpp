@@ -22,17 +22,16 @@ bool Widget::readBadSportValue() {
         QMessageBox::critical(nullptr, QString(), tr("GTA5未在运行中，请以管理员身份运行本程序,启动或重启游戏后再次尝试！"));
         return false;
     }
-    int offsets[5] = { 0xF0, 0x8, 0x18, 0xB0, 0xA08 };
+    int offsets[5] = { 0xDC8, 0x118, 0x18, 0xB0, 0xA08 };
     static DWORD64 ptr;
     static float Value = 0;
     ReadProcessMemory(gtaHandle,
-                      (LPCVOID)((DWORD64)MemoryUtil::getProcessModuleHandle(pid, L"GTA5.exe") + 0x02687560),
+                      (LPCVOID)((DWORD64)MemoryUtil::getProcessModuleHandle(pid, L"GTA5.exe") + 0x02EF5880),
                       &ptr, sizeof(DWORD64), 0);
     for (int i = 0; i < sizeof(offsets) / sizeof(offsets[0]) - 1; i++) {
         ReadProcessMemory(gtaHandle, (LPCVOID)(ptr + offsets[i]), &ptr, sizeof(DWORD64), 0);
     }
     ReadProcessMemory(gtaHandle, (LPCVOID)(ptr + offsets[4]), &Value, 4, 0);
-    CloseHandle(gtaHandle);
     BadSportValue = Value;
     return true;
 }

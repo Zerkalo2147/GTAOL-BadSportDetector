@@ -56,9 +56,9 @@
   <widget class="QLabel" name="labBadSportValue">
    <property name="geometry">
     <rect>
-     <x>95</x>
+     <x>64</x>
      <y>50</y>
-     <width>70</width>
+     <width>121</width>
      <height>70</height>
     </rect>
    </property>
